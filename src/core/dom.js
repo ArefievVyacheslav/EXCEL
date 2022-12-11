@@ -40,12 +40,40 @@ class Dom {
     return this.$el.getBoundingClientRect()
   }
 
+  find (selector) {
+    return $(this.$el.querySelector(selector))
+  }
+
   findAll (selector) {
     return this.$el.querySelectorAll(selector)
   }
 
+  addClass (className) {
+    this.$el.classList.add(className)
+  }
+
+  removeClass (className) {
+    this.$el.classList.remove(className)
+  }
+
+  focus () {
+    this.$el.focus()
+    return this
+  }
+
   css (styles = {}) {
     Object.keys(styles).forEach(style => this.$el.style[ style ] = styles[ style ])
+  }
+
+  id (parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+      return {
+        row: +parsed[0],
+        col: +parsed[1]
+      }
+    }
+    return this.data.id
   }
 
   get data () {
